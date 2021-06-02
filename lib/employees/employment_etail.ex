@@ -1,4 +1,4 @@
-defmodule HiredHand.Employee.EmploymentDetail do
+defmodule HiredHand.Employees.EmploymentDetail do
   @enfore_keys [:id, :date_of_joining, :employment_type, :employment_status]
 
   defstruct [:id, :date_of_joining, :employment_type, :employment_status]

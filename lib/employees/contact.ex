@@ -1,4 +1,4 @@
-defmodule HiredHand.Employee.Contact do
+defmodule HiredHand.Employees.Contact do
   @enfore_keys [:employee_id, :contact_number, :email]
   defstruct [:employee_id, :contact_number, :email]
 
