@@ -1,6 +1,6 @@
 defmodule HiredHand.Branches.Detail do
   @enfore_keys [:name]
-  defstruct [:id, :name, :employees]
+  defstruct [:id, :name, employees: []]
 
   def new(%{name: name}) do
     %__MODULE__{
@@ -10,6 +10,6 @@ defmodule HiredHand.Branches.Detail do
   end
 
   def add_employee(branch, employee) do
-    %{branch | employee: employee}
+    %{branch | employees: branch.employees++ [employee]}
   end
 end
