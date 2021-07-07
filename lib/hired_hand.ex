@@ -16,5 +16,4 @@ defmodule HiredHand do
   defdelegate add_employee_to_branch(branch, employee),
     to: BranchDetail,
     as: :add_employee
-
 end

@@ -10,6 +10,6 @@ defmodule HiredHand.Branches.Detail do
   end
 
   def add_employee(branch, employee) do
-    %{branch | employees: branch.employees++ [employee]}
+    %{branch | employees: branch.employees ++ [employee]}
   end
 end
