@@ -6,7 +6,7 @@ defmodule HiredHand.Organization.Employees.Profile do
     use HiredHand.Storage.Base, module: HiredHand.Organization.Employees.Profile
   end
 
-  def new(branch, department , %{
+  def new(branch, department, %{
         # first_name: first_name,
         # last_name: last_name,
         age: age
@@ -27,4 +27,3 @@ defmodule HiredHand.Organization.Employees.Profile do
     }
   end
 end
-

@@ -1,19 +1,14 @@
 defmodule HiredHand do
-  alias HiredHand.{
-    Employee.Detail
+  alias HiredHand.Organization.{
+    Employees.Profile,
+    Branches
   }
 
-  alias HiredHand.Branches.Detail, as: BranchDetail
-
-  defdelegate create_employee(params),
-    to: Detail,
+  defdelegate create_employee(branch, department, params),
+    to: Profile,
     as: :new
 
   defdelegate create_branch(params),
-    to: BranchDetail,
+    to: Branches,
     as: :new
-
-  defdelegate add_employee_to_branch(branch, employee),
-    to: BranchDetail,
-    as: :add_employee
 end

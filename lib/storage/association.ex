@@ -7,5 +7,4 @@ defmodule HiredHand.Storage.Association do
       module: m
     }
   end
-
 end

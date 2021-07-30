@@ -1,9 +1,16 @@
 defmodule HiredHand.Organization.Employees.Employment do
   @enfore_keys [:id, :date_of_joining, :employment_type, :employment_status]
 
-  defstruct [:id, :date_of_joining, :employment_type, :employment_status]
+  defstruct [:id, :date_of_joining, :employment_type, :employment_status, :employee]
 
-  def new(%{
+  alias HiredHand.{
+    Organization,
+    Storage.Association
+  }
+
+  alias Organization.Employees.Profile
+
+  def new(%Profile{} = employee, %{
         id: id,
         date_of_joining: date_of_joining,
         employment_type: employment_type,
@@ -13,7 +20,8 @@ defmodule HiredHand.Organization.Employees.Employment do
       id: id,
       date_of_joining: date_of_joining,
       employment_type: employment_type,
-      employment_status: employment_status
+      employment_status: employment_status,
+      employee: Association.new(employee)
     }
   end
 end

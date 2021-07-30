@@ -9,25 +9,24 @@ defmodule HiredHand.Storage.Base do
         Agent.start_link(fn -> [] end, name: __MODULE__)
       end
 
-   
       def add(%unquote(module){id: resource_id} = resource) do
         get(resource_id)
         |> add_to_storage(resource)
       end
 
       def update(%unquote(module){id: resource_id} = resource, params) do
-        sanitized_params = Map.delete(params, :id )
+        sanitized_params = Map.delete(params, :id)
 
         case get(resource_id) do
           %unquote(module){} = resource ->
             updated_resource = Map.merge(resource, sanitized_params)
 
-            Agent.update(__MODULE__, fn state -> 
+            Agent.update(__MODULE__, fn state ->
               without_resorce =
-              state
-              |> Enum.reject(fn r -> 
-                r.id == resource_id
-              end)
+                state
+                |> Enum.reject(fn r ->
+                  r.id == resource_id
+                end)
 
               [updated_resource | resource]
             end)
@@ -37,17 +36,14 @@ defmodule HiredHand.Storage.Base do
         end
       end
 
-
       defp add_to_storage(nil, resource) do
         Agent.update(__MODULE__, fn state -> [resource | state] end)
       end
 
-
-      defp add_to_storage(_already_exist,  _resource) do
+      defp add_to_storage(_already_exist, _resource) do
         {:error, :already_exists}
       end
 
-     
       def all do
         Agent.get(__MODULE__, fn state -> state end)
       end

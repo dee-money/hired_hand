@@ -1,11 +1,13 @@
 defmodule HiredHand.Organization.Employees.Contact do
-  @enfore_keys [:contact_number, :email , :employee]
+  @enfore_keys [:contact_number, :email, :employee]
   defstruct [:id, :contact_number, :email, :employee]
 
-  alias HiredHand.Organization.{
-    Storage.Association, 
-    Employees.Profile
+  alias HiredHand.{
+    Organization,
+    Storage.Association
   }
+
+  alias Organization.Employees.Profile
 
   defmodule Store do
     use HiredHand.Storage.Base, module: HiredHand.Organization.Employees.Contact
