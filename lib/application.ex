@@ -7,7 +7,9 @@ defmodule HiredHand.Application do
 
   def start(_type, _args) do
     children = [
-      HiredHand.Employees.Detail.Store,
+      HiredHand.Organization.Employees.Profile.Store,
+      HiredHand.Organization.Employees.Contact.Store,
+      HiredHand.Organization.Department.Store,
       {Plug.Cowboy, scheme: :http, plug: HiredHand.Router, options: [port: 4040]}
       # Starts a worker by calling: HiredHand.Worker.start_link(arg)
       # {HiredHand.Worker, arg}
