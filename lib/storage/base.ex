@@ -10,8 +10,20 @@ defmodule HiredHand.Storage.Base do
       end
 
       def add(%unquote(module){id: resource_id} = resource) do
-        get(resource_id)
-        |> add_to_storage(resource)
+        case get(resource_id) do
+          nil ->
+            Agent.update(__MODULE__, fn state ->
+              new_state = [resource | state]
+
+              unquote(module)
+              |> HiredHand.Storage.Persistence.persist(new_state)
+
+              new_state
+            end)
+
+          %unquote(module){} ->
+            {:error, :already_exists}
+        end
       end
 
       def update(%unquote(module){id: resource_id} = resource, params) do
@@ -34,14 +46,6 @@ defmodule HiredHand.Storage.Base do
           nil ->
             {:error, :not_found}
         end
-      end
-
-      defp add_to_storage(nil, resource) do
-        Agent.update(__MODULE__, fn state -> [resource | state] end)
-      end
-
-      defp add_to_storage(_already_exist, _resource) do
-        {:error, :already_exists}
       end
 
       def all do

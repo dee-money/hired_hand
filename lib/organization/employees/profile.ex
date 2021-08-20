@@ -1,4 +1,5 @@
 defmodule HiredHand.Organization.Employees.Profile do
+  @derive Jason.Encoder
   # @enfore_keys [:first_name, :last_name, :age, :date_of_birth, :gender]
   defstruct [:id, :first_name, :last_name, :age, :date_of_birth, :gender]
 
@@ -6,7 +7,7 @@ defmodule HiredHand.Organization.Employees.Profile do
     use HiredHand.Storage.Base, module: HiredHand.Organization.Employees.Profile
   end
 
-  def new(branch, department, %{
+  def new(_branch, _department, %{
         # first_name: first_name,
         # last_name: last_name,
         age: age
