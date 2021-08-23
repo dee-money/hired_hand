@@ -6,7 +6,9 @@ defmodule HiredHand.Storage.Base do
       use Agent
 
       def start_link(_) do
-        Agent.start_link(fn -> [] end, name: __MODULE__)
+        Agent.start_link(fn -> HiredHand.Storage.Persistence.load(unquote(module)) end,
+          name: __MODULE__
+        )
       end
 
       def add(%unquote(module){id: resource_id} = resource) do
