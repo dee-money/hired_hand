@@ -1,10 +1,6 @@
-defmodule HiredHand.Organization.Department do
+defmodule HiredHand.Organization.Branches do
   @enfore_keys [:name]
   defstruct [:id, :name]
-
-  defmodule Store do
-    use HiredHand.Storage.Base, module: HiredHand.Organization.Department
-  end
 
   def new(%{name: name}) do
     %__MODULE__{
